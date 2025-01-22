@@ -9,7 +9,8 @@
     "dist": "electron-builder",
     "dist:mac": "electron-builder --mac",
     "dist:win": "electron-builder --win",
-    "dist:linux": "electron-builder --linux"
+    "dist:linux": "electron-builder --linux",
+    "postinstall": "electron-builder install-app-deps"
   },
   "build": {
     "appId": "com.imagecompressor.app",
@@ -19,48 +20,34 @@
     },
     "files": [
       "**/*",
-      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
-      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
-      "!**/node_modules/*.d.ts",
-      "!**/node_modules/.bin",
-      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
-      "!.editorconfig",
-      "!**/._*",
-      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
-      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
-      "!**/{appveyor.yml,.travis.yml,circle.yml}",
-      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+      "!dist/*",
+      "!build/*",
+      "!.git/*"
     ],
     "mac": {
       "category": "public.app-category.graphics-design",
-      "target": ["dmg", "zip"],
-      "icon": "build/icon.icns",
-      "darkModeSupport": true
+      "target": "zip",
+      "icon": "build/icon.icns"
     },
     "win": {
-      "target": ["nsis", "portable"],
+      "target": "portable",
       "icon": "build/icon.ico"
     },
     "linux": {
-      "target": ["AppImage", "deb", "rpm"],
+      "target": "AppImage",
       "icon": "build/icon.png",
       "category": "Graphics"
     },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
-    }
+    "electronVersion": "19.1.9"
   },
   "dependencies": {
-    "electron-store": "^8.1.0",
-    "sharp": "^0.32.1"
+    "@electron/osx-sign": "1.0.5",
+    "sharp": "0.32.6"
   },
   "devDependencies": {
-    "electron": "^24.3.0",
-    "electron-builder": "^24.3.0"
+    "electron": "19.1.9",
+    "electron-builder": "23.0.3"
   },
-  "author": "Your Name",
+  "author": "Serhat Aksakal",
   "license": "MIT"
 } 
