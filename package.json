@@ -71,7 +71,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/image-compressor.git"
+    "url": "https://github.com/onwp/image-compressor.git"
   },
   "dependencies": {
     "@electron/osx-sign": "1.0.5",
