@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, shell, clipboard, nativeImage } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const settingsManager = require('./src/utils/settings-manager');
@@ -173,6 +173,30 @@ ipcMain.handle('show-directory-picker', async () => {
     return result.filePaths[0];
   }
   return null;
+});
+
+ipcMain.handle('open-path', async (event, path) => {
+  try {
+    await shell.showItemInFolder(path);
+    return true;
+  } catch (error) {
+    console.error('Error opening path:', error);
+    return false;
+  }
+});
+
+ipcMain.handle('copy-file', async (event, filePath) => {
+  try {
+    // Read the image file
+    const image = nativeImage.createFromPath(filePath);
+    
+    // Copy the image to clipboard
+    clipboard.writeImage(image);
+    return true;
+  } catch (error) {
+    console.error('Error copying file:', error);
+    return false;
+  }
 });
 
 app.on('window-all-closed', () => {

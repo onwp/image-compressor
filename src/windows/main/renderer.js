@@ -73,6 +73,40 @@ function formatFileSize(bytes) {
   return `${size.toFixed(1)} ${units[unitIndex]}`;
 }
 
+// Add at the top with other event handlers
+async function openPath(path) {
+  await window.electron.openPath(path);
+}
+
+async function copyToClipboard(path, button) {
+  try {
+    const success = await window.electron.copyFile(path);
+    if (!success) throw new Error('Failed to copy file');
+    
+    // Visual feedback
+    const originalText = button.innerHTML;
+    button.classList.add('copied');
+    button.textContent = 'Copied!';
+    
+    // Reset after 2 seconds
+    setTimeout(() => {
+      button.classList.remove('copied');
+      button.innerHTML = originalText;
+    }, 2000);
+  } catch (err) {
+    console.error('Failed to copy:', err);
+    // Show error feedback
+    const originalText = button.innerHTML;
+    button.style.color = '#f44336';
+    button.textContent = 'Error!';
+    
+    setTimeout(() => {
+      button.style.color = '';
+      button.innerHTML = originalText;
+    }, 2000);
+  }
+}
+
 function displayResult(result) {
   const resultItem = document.createElement('div');
   resultItem.className = 'result-item';
@@ -87,9 +121,35 @@ function displayResult(result) {
           <span class="arrow">-></span>
           <span class="compressed-size">${formatFileSize(result.compressedSize)}</span>
         </div>
+        <div class="save-location">
+          <span class="save-location-label">Saved to:</span>
+          <span class="save-location-path">${result.savePath}</span>
+          <div class="save-location-actions">
+            <button class="action-button" title="Open folder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+              Open
+            </button>
+            <button class="action-button" title="Copy path">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              Copy
+            </button>
+          </div>
+        </div>
       </div>
       <span class="savings">Reduced by ${savings}%</span>
     `;
+
+    // Add event listeners for the buttons
+    const openButton = resultItem.querySelector('.action-button[title="Open folder"]');
+    const copyButton = resultItem.querySelector('.action-button[title="Copy path"]');
+
+    openButton.addEventListener('click', () => openPath(result.savePath));
+    copyButton.addEventListener('click', () => copyToClipboard(result.savePath, copyButton));
   } else {
     resultItem.innerHTML = `
       <span class="filename">${result.fileName}</span>
@@ -98,6 +158,7 @@ function displayResult(result) {
   }
   
   resultsList.appendChild(resultItem);
+  document.getElementById('results').classList.remove('hidden');
 }
 
 // Apply theme on load and when settings change

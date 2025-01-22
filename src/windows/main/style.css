@@ -240,6 +240,87 @@ body {
   display: none;
 }
 
+.save-location {
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 4px;
+  word-break: break-all;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.save-location-path {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.save-location-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  font-size: 0.8em;
+  color: #2196f3;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+}
+
+.action-button:hover {
+  background: rgba(33, 150, 243, 0.1);
+}
+
+.action-button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.action-button.copied {
+  background: #4caf50;
+  color: white;
+}
+
+.action-button.copied svg {
+  display: none;
+}
+
+body[data-theme="dark"] .action-button,
+body[data-theme="system"] .action-button {
+  color: #64b5f6;
+}
+
+body[data-theme="dark"] .action-button:hover,
+body[data-theme="system"] .action-button:hover {
+  background: rgba(33, 150, 243, 0.2);
+}
+
+body[data-theme="dark"] .action-button.copied,
+body[data-theme="system"] .action-button.copied {
+  background: #43a047;
+  color: white;
+}
+
+body[data-theme="dark"] .save-location,
+body[data-theme="system"] .save-location {
+  color: #999;
+}
+
+body[data-theme="dark"] .save-location-label,
+body[data-theme="system"] .save-location-label {
+  color: #777;
+}
+
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
   body[data-theme="system"],

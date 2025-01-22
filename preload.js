@@ -12,5 +12,7 @@ contextBridge.exposeInMainWorld('electron', {
     return await ipcRenderer.invoke('save-settings', settings);
   },
   compressImages: (filePath) => ipcRenderer.invoke('compress-images', filePath),
-  showDirectoryPicker: () => ipcRenderer.invoke('show-directory-picker')
+  showDirectoryPicker: () => ipcRenderer.invoke('show-directory-picker'),
+  openPath: (path) => ipcRenderer.invoke('open-path', path),
+  copyFile: (path) => ipcRenderer.invoke('copy-file', path)
 }); 
