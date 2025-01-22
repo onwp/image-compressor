@@ -35,8 +35,8 @@ function getPlatformWindowSettings() {
   switch (process.platform) {
     case 'darwin':
       return {
-        titleBarStyle: 'hiddenInset',
-        trafficLightPosition: { x: 20, y: 32 }
+        titleBarStyle: 'hidden',
+        trafficLightPosition: { x: 10, y: 10 }
       };
     case 'win32':
       return {
@@ -95,6 +95,19 @@ function createSettingsWindow() {
 app.whenReady().then(() => {
   initSettings();
   createMainWindow();
+
+  // Set dock icon for macOS
+  if (process.platform === 'darwin') {
+    const iconPath = app.isPackaged
+      ? path.join(process.resourcesPath, 'icon.png')
+      : path.join(__dirname, 'build', 'icon.png');
+    
+    try {
+      app.dock.setIcon(iconPath);
+    } catch (error) {
+      console.error('Failed to set dock icon:', error);
+    }
+  }
 });
 
 ipcMain.handle('open-settings', () => {
