@@ -16,12 +16,20 @@
     "appId": "com.imagecompressor.app",
     "productName": "Image Compressor",
     "directories": {
-      "output": "dist"
+      "output": "dist",
+      "buildResources": "build"
     },
     "files": [
       "**/*",
       "!dist/*",
       "!.git/*"
+    ],
+    "extraResources": [
+      {
+        "from": "build",
+        "to": "build",
+        "filter": ["*.png", "*.ico", "*.icns"]
+      }
     ],
     "mac": {
       "category": "public.app-category.graphics-design",

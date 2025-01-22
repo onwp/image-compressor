@@ -99,7 +99,7 @@ app.whenReady().then(() => {
   // Set dock icon for macOS
   if (process.platform === 'darwin') {
     const iconPath = app.isPackaged
-      ? path.join(process.resourcesPath, 'icon.png')
+      ? path.join(process.resourcesPath, 'build', 'icon.png')
       : path.join(__dirname, 'build', 'icon.png');
     
     try {
@@ -161,11 +161,6 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
-
-// Platform-specific app behaviors
-if (process.platform === 'darwin') {
-  app.dock.setIcon(path.join(__dirname, 'build/icon.png'));
-}
 
 // Handle macOS activation
 app.on('activate', () => {
