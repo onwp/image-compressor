@@ -127,7 +127,11 @@ ipcMain.handle('get-settings', () => {
 
 ipcMain.handle('save-settings', async (event, settings) => {
   try {
-    fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
+    // Update settings in both the file and the settings manager
+    const success = settingsManager.saveSettings(settings);
+    if (!success) {
+      throw new Error('Failed to save settings');
+    }
     return true;
   } catch (error) {
     console.error('Error saving settings:', error);
@@ -136,13 +140,28 @@ ipcMain.handle('save-settings', async (event, settings) => {
 });
 
 ipcMain.handle('compress-images', async (event, filePath) => {
-  const settings = {
-    compressionRate: settingsManager.get('compressionRate'),
-    savePath: settingsManager.get('savePath'),
-    suffix: settingsManager.get('suffix')
-  };
-  
-  return await compressImage(filePath, settings);
+  try {
+    // Get latest settings from the settings manager
+    const settings = {
+      compressionRate: parseInt(settingsManager.get('compressionRate')),
+      savePath: settingsManager.get('savePath'),
+      suffix: settingsManager.get('suffix')
+    };
+
+    // Ensure the save directory exists
+    if (!fs.existsSync(settings.savePath)) {
+      fs.mkdirSync(settings.savePath, { recursive: true });
+    }
+    
+    return await compressImage(filePath, settings);
+  } catch (error) {
+    console.error('Error during compression:', error);
+    return {
+      success: false,
+      fileName: path.basename(filePath),
+      error: error.message
+    };
+  }
 });
 
 ipcMain.handle('show-directory-picker', async () => {
