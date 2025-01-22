@@ -2,6 +2,24 @@
 
 A desktop application built with Electron that allows you to compress images efficiently while maintaining quality. This tool helps reduce image file sizes for web usage, storage optimization, or sharing purposes.
 
+## Downloads
+
+Pre-built binaries are available for all major platforms. Download the latest version for your operating system:
+
+### macOS
+- Intel (x64): [Image Compressor-x64.dmg](../../releases/latest/download/Image.Compressor-x64.dmg)
+- Apple Silicon (arm64): [Image Compressor-arm64.dmg](../../releases/latest/download/Image.Compressor-arm64.dmg)
+
+### Windows
+- Installer: [Image Compressor-Setup.exe](../../releases/latest/download/Image.Compressor-Setup.exe)
+- Portable: [Image Compressor-portable.exe](../../releases/latest/download/Image.Compressor-portable.exe)
+
+### Linux
+- AppImage: [Image Compressor.AppImage](../../releases/latest/download/Image.Compressor.AppImage)
+- Debian/Ubuntu: [image-compressor.deb](../../releases/latest/download/image-compressor.deb)
+
+[View all releases](../../releases)
+
 ## Features
 
 - Simple and intuitive user interface
@@ -12,7 +30,7 @@ A desktop application built with Electron that allows you to compress images eff
 - Preview compressed images before saving
 - Maintains EXIF data (optional)
 
-## Installation
+## Building from Source
 
 Make sure you have [Node.js](https://nodejs.org/) installed on your system.
 
@@ -27,20 +45,23 @@ cd image-compressor
 npm install
 ```
 
-3. Start the application:
+3. Start the application in development mode:
 ```bash
 npm start
 ```
 
-## Building from Source
-
-To build the application for your platform:
-
+4. Build the application for your platform:
 ```bash
-npm run build
+# Build for all platforms
+npm run dist
+
+# Build for specific platforms
+npm run dist:mac    # macOS
+npm run dist:win    # Windows
+npm run dist:linux  # Linux
 ```
 
-The built application will be available in the `dist` directory.
+The built applications will be available in the `dist` directory.
 
 ## Development
 

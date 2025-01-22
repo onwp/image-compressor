@@ -6,10 +6,11 @@
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder",
+    "dist": "electron-builder -mwl",
     "dist:mac": "electron-builder --mac",
     "dist:win": "electron-builder --win",
     "dist:linux": "electron-builder --linux",
+    "release": "electron-builder -mwl -p always",
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
@@ -33,19 +34,44 @@
     ],
     "mac": {
       "category": "public.app-category.graphics-design",
-      "target": "zip",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        },
+        {
+          "target": "zip",
+          "arch": ["x64", "arm64"]
+        }
+      ],
       "icon": "build/icon.icns"
     },
     "win": {
-      "target": "portable",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
       "icon": "build/icon.ico"
     },
     "linux": {
-      "target": "AppImage",
+      "target": ["AppImage", "deb"],
       "icon": "build/icon.png",
       "category": "Graphics"
     },
-    "electronVersion": "19.1.9"
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/image-compressor.git"
   },
   "dependencies": {
     "@electron/osx-sign": "1.0.5",
@@ -53,7 +79,8 @@
   },
   "devDependencies": {
     "electron": "19.1.9",
-    "electron-builder": "23.0.3"
+    "electron-builder": "23.0.3",
+    "electron-updater": "5.3.0"
   },
   "author": "Serhat Aksakal",
   "license": "MIT"
