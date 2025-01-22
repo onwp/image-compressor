@@ -32,6 +32,11 @@
         "filter": ["*.png", "*.ico", "*.icns"]
       }
     ],
+    "asar": true,
+    "asarUnpack": [
+      "node_modules/sharp/**/*"
+    ],
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
     "mac": {
       "category": "public.app-category.graphics-design",
       "target": [
@@ -44,7 +49,10 @@
           "arch": ["x64", "arm64"]
         }
       ],
-      "icon": "build/icon.icns"
+      "icon": "build/icon.icns",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "electronLanguages": ["en"]
     },
     "win": {
       "target": [
@@ -57,17 +65,22 @@
           "arch": ["x64"]
         }
       ],
-      "icon": "build/icon.ico"
+      "icon": "build/icon.ico",
+      "publisherName": "Image Compressor"
     },
     "linux": {
       "target": ["AppImage", "deb"],
       "icon": "build/icon.png",
-      "category": "Graphics"
+      "category": "Graphics",
+      "maintainer": "Serhat Aksakal",
+      "vendor": "Image Compressor"
     },
     "publish": {
       "provider": "github",
       "releaseType": "release"
-    }
+    },
+    "npmRebuild": true,
+    "buildDependenciesFromSource": true
   },
   "repository": {
     "type": "git",
