@@ -1,5 +1,7 @@
 # Image Compressor
 
+![Image Compressor](./screen.png)
+
 A desktop application built with Electron that allows you to compress images efficiently while maintaining quality. This tool helps reduce image file sizes for web usage, storage optimization, or sharing purposes.
 
 ## Downloads
