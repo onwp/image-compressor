@@ -29,3 +29,4 @@ Pre-built binaries are available for all major platforms. Download the latest ve
 - Supports multiple image formats (PNG, JPG, JPEG)
 - Adjustable compression settings
 - Batch processing capability
+- Dark mode/light mode/system mode
