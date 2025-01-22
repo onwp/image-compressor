@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Settings</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="settings-header">
+    <h2>Settings</h2>
+    <button id="closeBtn" class="close-button" title="Close">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor">
+        <path d="M1 1L13 13M1 13L13 1" stroke-width="2"/>
+      </svg>
+    </button>
+  </div>
+  
+  <div class="setting-group">
+    <label for="compressionRate">Compression Rate</label>
+    <div class="slider-container">
+      <input type="range" id="compressionRate" min="1" max="100" value="80">
+      <span id="compressionValue">80%</span>
+    </div>
+  </div>
+  
+  <div class="setting-group">
+    <label for="savePath">Save Path</label>
+    <div class="path-input">
+      <input type="text" id="savePath" readonly>
+      <button id="browseBtn">Browse</button>
+    </div>
+  </div>
+  
+  <div class="setting-group">
+    <label for="suffix">File Suffix</label>
+    <input type="text" id="suffix" value="-min">
+  </div>
+
+  <div class="setting-group">
+    <label for="theme">Theme</label>
+    <select id="theme">
+      <option value="system">System Default</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  </div>
+  
+  <div class="buttons">
+    <button id="saveBtn" class="primary">Save</button>
+    <button id="cancelBtn">Cancel</button>
+  </div>
+  
+  <script src="renderer.js"></script>
+</body>
+</html> 
