@@ -9,16 +9,14 @@ A desktop application built with Electron that allows you to compress images eff
 Pre-built binaries are available for all major platforms. Download the latest version for your operating system:
 
 ### macOS
-- Intel (x64): [Image Compressor-x64.dmg](../../releases/download/v1.0.0/Image.Compressor-x64.dmg)
-- Apple Silicon (arm64): [Image Compressor-arm64.dmg](../../releases/download/v1.0.0/Image.Compressor-arm64.dmg)
+- Intel (x64): [Image Compressor-x64.dmg](../../releases/download/v1.0.0/Image.Compressor-1.0.0-x64.dmg)
+- Apple Silicon (arm64): [Image Compressor-arm64.dmg](../../releases/download/v1.0.0/Image.Compressor-1.0.0-arm64.dmg)
 
 ### Windows
-- Installer: [Image Compressor-Setup.exe](../../releases/download/v1.0.0/Image.Compressor-Setup.exe)
-- Portable: [Image Compressor-portable.exe](../../releases/download/v1.0.0/Image.Compressor-portable.exe)
+- Installer: [Image Compressor-Setup.exe](../../releases/download/v1.0.0/Image.Compressor-1.0.0-x64.exe)
 
 ### Linux
-- AppImage: [Image Compressor.AppImage](../../releases/download/v1.0.0/Image.Compressor.AppImage)
-- Debian/Ubuntu: [image-compressor.deb](../../releases/download/v1.0.0/image-compressor.deb)
+- AppImage: [Image Compressor.AppImage](../../releases/download/v1.0.0/Image.Compressor-1.0.0-arm64.AppImage)
 
 [View all releases](../../releases)
 
